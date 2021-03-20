@@ -1,0 +1,22 @@
+version: '3'
+
+services: 
+  web:
+    build:
+      context: . #where we want files and folders everything is being pulled from
+      dockerfile: Dockerfile.dev #look for the Dockerfile to build the image
+    ports: 
+      - "3000:3000"
+    volumes:
+      - /app/node_modules
+      - .:/app
+
+  tests:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    volumes:
+      - /app/node_modules
+      - .:/app
+    command: ["npm", "run", "test"]
+   
